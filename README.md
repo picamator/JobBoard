@@ -14,6 +14,7 @@ Requirements
 * [Symfony 3](http://symfony.com/)
 * [MySQL 5.7](https://www.mysql.com/)
 * [RabbitMQ](https://www.rabbitmq.com/)
+* [AngularJS 1.5](https://angularjs.org/)
 
 Domain
 ------
@@ -55,19 +56,163 @@ Application uses Layer architecture.
 It contains those layers:
 
 * Framework: Symfony 3
-* Application: Mediator between layers
-* Domain: Business logic
+* Application: Mediator between layers e.g. Services, Commands
+* Domain: Business logic e.g. Managers
+* Core Domain: Data and operations e.g. Entities, Repositories
  
 _Note_: Domain communicate with any 3-rd party libraries through Gateways.
 
+More details inside [class diagram](doc/uml/class.diagram.png) and [layer activity diagram](doc/uml/layer.activity.diagram.png).
+
 ### Rest API
-in-progress
+Rest API on the second level of [Leonard Richardson maturity model](http://martinfowler.com/articles/richardsonMaturityModel.html). 
+
+All request-response supports JSON format.
+
+#### Endpoint
+The API endpoint is `api\v1` where
+
+* `api` - indicator that it's an API area
+* `v1` - api version
+
+#### Resources
+Table bellow shows available resources and methods:
+
+Resource            | Methods
+---                 | ---
+job                 | GET, POST, PUT
+
+#### GET:job
+Request Parameters:
+
+Name        | Data Type | Default value | Description
+---         | ---       | ---           | ---
+page        | integer   | 1             | Page number. Part of pagination.
+maxPerPage  | integer   | 20            | Max number of jobs on one page. Part of pagination.
+
+Request Body:
+
+* Empty body
+
+Response Body:
+```json
+
+{
+    "data": [
+     {
+        "id": 1,
+        "title": "Job Title",
+        "description": "Job description",
+        "email": "publisher.email.@domain.com",
+        "date": "2016-11-15"
+      }
+    ],
+    "maxPerPage": 20,
+    "page": 1,
+    "count": 1,
+    "code": 200
+}
+
+```
+
+Response Code:
+
+* 200
+
+#### POST:job
+Request Parameters:
+
+* No parameters
+
+Request Body:
+```json
+
+ {
+    "title": "Job Title",
+    "description": "Job description",
+    "email": "publisher.emai.@domain.com"
+  }
+
+```
+
+Response Body:
+
+* Empty body
+
+Response Code:
+
+* 204
+
+#### PUT:job
+Request Parameters:
+
+* token: 32 length string
+
+Request Body:
+```json
+
+{
+  "id": 1,
+  "status": "published"
+
+}
+
+```
+
+Response Body:
+```json
+
+{
+  "data": {
+    "id": 1,
+    "title": "Job Title",
+    "description": "Job description",
+    "email": "publisher.email.@domain.com",
+    "date": "2016-11-15"
+  },
+  "code": 200
+}
+
+```
+
+Response Code:
+
+* 200
+
+#### Errors
+All errors message have one format that is described bellow:
+```json
+{
+    "msg": "500 Internal server error",
+    "code": 500
+}
+```
+
+#### HTTP codes
+Table bellow shows list of supported HTTP codes.
+
+Code | Message                      | Description
+---  | ---                          | ---             
+500  | 500 Internal Server Error    | Critical application error
+501  | 501 Not Implemented          | HTTP method was not implemented for that resource
+404  | 404 Not Found                | Resource was not found
+200  | 200 OK                       | Successful HTTP request
+204  | 204 No Content               | Server successfully processed the request
 
 ### Database
 Database is in [EER diagram](doc/db/job_board.png).
 
 ### UI
-in-progress
+User Interface communicate with REST API.
+Therefore all pages can be full page cached because thay do not contain any server specific information.
+
+User interface contains with several pages:
+
+* Job board: list og published jobs ordered by date
+* Confirmation page: secret page for job approving/rejection
+* Job posting: form for job posting
+* Privacy: privacy page
+* Licence: licence page
 
 Developing
 ----------
