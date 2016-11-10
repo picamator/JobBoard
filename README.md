@@ -70,7 +70,7 @@ Rest API on the second level of [Leonard Richardson maturity model](http://marti
 All request-response supports JSON format.
 
 #### Endpoint
-The API endpoint is `api\v1` where
+The API endpoint is `http://job-board.dev:8081\api\v1` where
 
 * `api` - indicator that it's an API area
 * `v1` - api version
@@ -213,6 +213,9 @@ User interface contains with several pages:
 * Job posting: form for job posting
 * Privacy: privacy page
 * Licence: licence page
+
+#### Endpoint
+The API endpoint is `http://job-board.dev:8081`
 
 Developing
 ----------
