@@ -11,6 +11,7 @@ RUN apt-get -y install php7.0-zip
 RUN apt-get -y install php7.0-intl
 RUN apt-get -y install php7.0-bcmath
 RUN apt-get -y install php7.0-mbstring
+RUN apt-get -y install php7.0-mysql
 
 # git
 RUN apt-get -y install git
@@ -96,6 +97,20 @@ RUN echo "xdebug.remote_host = $host_ip" >> /etc/php/7.0/apache2/conf.d/20-xdebu
 # display errors
 RUN echo "display_errors = 1" >> /etc/php/7.0/cli/php.ini
 RUN echo "display_errors = 1" >> /etc/php/7.0/apache2/php.ini
+
+# memcached
+RUN apt-get install -y gcc make autoconf libc-dev pkg-config
+RUN apt-get install -y zlib1g-dev
+RUN apt-get install -y libmemcached-dev
+RUN git clone https://github.com/php-memcached-dev/php-memcached
+RUN cd php-memcached && git checkout php7
+RUN cd php-memcached && phpize
+RUN cd php-memcached && PATH=/opt/sp/php7.0/bin:$PATH ./configure --disable-memcached-sasl
+RUN cd php-memcached && make
+RUN cd php-memcached && make install
+RUN bash -c "echo extension=memcached.so > /etc/php/7.0/mods-available/memcached.ini"
+RUN bash -c "echo extension=memcached.so > /etc/php/7.0/cli/conf.d/20-memcached.ini"
+RUN bash -c "echo extension=memcached.so > /etc/php/7.0/apache2/conf.d/20-memcached.ini"
 
 # expose ports
 EXPOSE 22 80

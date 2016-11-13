@@ -4,8 +4,9 @@ Docker
 Application environment has several containers:
 
 * jobboard-web - [Apache2.4](https://www.apache.org/), [PHP 7.0](http://php.net/manual/en/migration70.new-features.php), [OpenSSH](https://www.openssh.com/), [Supervised](http://supervisord.org/)
-* jobboard-mysql - [official MySQL docker] ()
-* jobboard-rabbitmq
+* jobboard-mysql - [official MySQL docker](https://hub.docker.com/_/mysql/)
+* jobboard-rabbitmq - [official RabbitMQ docker](https://hub.docker.com/_/rabbitmq/)
+* jobboard-memcached - [official Memcached docker](https://hub.docker.com/_/memcached/)
 
 Pre installation
 ----------------
@@ -63,6 +64,12 @@ To configurate connection to RabbitMQ inside 'jobboard-web' use:
 * port: 15672
 * username: 'guest'
 * password: 'guest'
+
+### jobboard-memcached
+To configurate connection to RabbitMQ inside 'jobboard-web' use:
+
+* host: jobboard-memcached
+* port
 
 Usefull commands
 ----------------

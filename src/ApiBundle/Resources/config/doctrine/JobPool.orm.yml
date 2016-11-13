@@ -1,0 +1,37 @@
+ApiBundle\Entity\JobPool:
+  type: entity
+  table: job_pool
+  repositoryClass: ApiBundle\Repository\JobPoolRepository
+  manyToOne:
+    publisher:
+      targetEntity: Publisher
+      joinColumn:
+        name: publisher_id
+        referencedColumnName: id
+    job_status:
+      targetEntity: JobStatus
+      joinColumn:
+        name: job_status_id
+        referencedColumnName: id
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    publisherId:
+      type: integer
+      column: publisher_id
+    jobStatusId:
+      type: integer
+      column: job_status_id
+    title:
+      type: string
+      length: 255
+    description:
+      type: text
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at

@@ -13,6 +13,7 @@ Requirements
 * [PHP 7.0](http://php.net/manual/en/migration70.new-features.php)
 * [Symfony 3](http://symfony.com/)
 * [MySQL 5.7](https://www.mysql.com/)
+* [Memcached 1.4](https://memcached.org/)
 * [RabbitMQ](https://www.rabbitmq.com/)
 * [AngularJS 1.5](https://angularjs.org/)
 
@@ -80,7 +81,7 @@ Table bellow shows available resources and methods:
 
 Resource            | Methods
 ---                 | ---
-job                 | GET, POST, PUT
+job                 | GET, POST, PUT, DELETE
 
 #### GET:job
 Request Parameters:
@@ -104,7 +105,7 @@ Response Body:
         "title": "Job Title",
         "description": "Job description",
         "email": "publisher.email.@domain.com",
-        "date": "2016-11-15"
+        "publishedDate": "2016-11-15"
       }
     ],
     "maxPerPage": 20,
@@ -146,15 +147,14 @@ Response Code:
 #### PUT:job
 Request Parameters:
 
-* token: 32 length string
+* id: job identifier
+* token: 32 characters string
 
 Request Body:
 ```json
 
 {
-  "id": 1,
   "status": "published"
-
 }
 
 ```
@@ -163,13 +163,14 @@ Response Body:
 ```json
 
 {
-  "data": {
+  "data": [{
     "id": 1,
     "title": "Job Title",
     "description": "Job description",
-    "email": "publisher.email.@domain.com",
-    "date": "2016-11-15"
-  },
+    "email": "publisher.email@domain.com",
+    "publishedDate": "2016-11-15"
+  }],
+  "count": 1,
   "code": 200
 }
 
@@ -178,6 +179,20 @@ Response Body:
 Response Code:
 
 * 200
+
+#### DELETE:job
+Request Parameters:
+
+* id: job identifier
+* token: 32 characters string
+
+Request Body:
+
+* Empty body
+
+Response Body:
+
+* Empty body
 
 #### Errors
 All errors message have one format that is described bellow:
@@ -195,6 +210,7 @@ Code | Message                      | Description
 ---  | ---                          | ---             
 500  | 500 Internal Server Error    | Critical application error
 501  | 501 Not Implemented          | HTTP method was not implemented for that resource
+400  | Validation error message     | Validation error
 404  | 404 Not Found                | Resource was not found
 200  | 200 OK                       | Successful HTTP request
 204  | 204 No Content               | Server successfully processed the request
@@ -213,6 +229,15 @@ User interface contains with several pages:
 * Job posting: form for job posting
 * Privacy: privacy page
 * Licence: licence page
+
+### Command bus
+in-progress
+
+### Events
+in-progress
+
+### Publisher statuses
+in-progress
 
 #### Endpoint
 The API endpoint is `http://job-board.dev:8081`

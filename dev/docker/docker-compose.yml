@@ -12,6 +12,7 @@ services:
     links:
       - jobboard-mysql:jobboard-mysql
       - jobboard-rabbitmq:jobboard-rabbitmq
+      - jobboard-memcached:jobboard-memcached
 
   jobboard-mysql:
     image: mysql:5.7
@@ -25,3 +26,8 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+
+  jobboard-memcached:
+    image: memcached:1.4
+    ports:
+      - "11211:11211"

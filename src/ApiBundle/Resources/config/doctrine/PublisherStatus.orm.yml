@@ -1,0 +1,19 @@
+ApiBundle\Entity\PublisherStatus:
+  type: entity
+  table: publisher_status
+  repositoryClass: ApiBundle\Repository\PublisherStatusRepository
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    slug:
+      type: string
+      length: 45
+      unique: true
+    name:
+      type: string
+      length: 45
+    createdAt:
+      type: datetime
+      column: created_at

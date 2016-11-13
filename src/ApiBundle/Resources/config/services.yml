@@ -1,0 +1,8 @@
+services:
+  publisher_status_manager:
+    class: ApiBundle\Model\Manager\PublisherStatusManager
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:PublisherStatus')"]
+
+  job_status_manager:
+    class: ApiBundle\Model\Manager\JobStatusManager
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:JobStatus')"]
