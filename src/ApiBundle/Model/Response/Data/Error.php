@@ -3,7 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Model\Response\Data;
 
-use ApiBundle\Model\Api\Data\ErrorInterface;
+use ApiBundle\Model\Api\Response\Data\ErrorInterface;
 
 /**
  * Value object for Error

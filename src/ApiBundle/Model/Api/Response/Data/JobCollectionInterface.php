@@ -1,6 +1,9 @@
 <?php
 namespace ApiBundle\Model\Api\Response\Data;
 
+/**
+ * Job collection
+ */
 interface JobCollectionInterface extends \IteratorAggregate
 {
     /**
