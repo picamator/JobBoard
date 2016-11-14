@@ -2,7 +2,7 @@ JobBoard
 ========
 
 [![PHP 7 ready](http://php7ready.timesplinter.ch/picamator/JobBoard/badge.svg)](https://travis-ci.org/picamator/JobBoard)
-[![SensioLabsInsight](https://insight.sensiolabs.com/projects/07268f8a-13e0-4760-93c9-2c76bd4204ca/big.png)](https://insight.sensiolabs.com/projects/07268f8a-13e0-4760-93c9-2c76bd4204ca)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/8b533637-392d-4be8-8204-77ff22f460ca/mini.png)](https://insight.sensiolabs.com/projects/8b533637-392d-4be8-8204-77ff22f460ca)
 
 Master
 ------

@@ -65,4 +65,3 @@ services:
   service_job_post:
     class: ApiBundle\Service\Controller\Job\PostService
     arguments: ["@=container"]
-    
