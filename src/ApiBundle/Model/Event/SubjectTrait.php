@@ -4,7 +4,7 @@ namespace ApiBundle\Model\Event;
 use ApiBundle\Model\Api\Event\ObserverInterface;
 
 /**
- * Subject - part of observer pattern implementation
+ * Subject, part of observer pattern implementation
  */
 trait SubjectTrait
 {

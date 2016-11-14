@@ -13,14 +13,14 @@ use ApiBundle\Model\Api\Response\Data\CollectionInterface;
 class Collection implements CollectionInterface, \JsonSerializable
 {
     /**
-     * @var array
-     */
-    private $data;
-
-    /**
      * @var string
      */
     private $type;
+
+    /**
+     * @var array
+     */
+    private $data;
 
     /**
      * @var int
@@ -33,13 +33,13 @@ class Collection implements CollectionInterface, \JsonSerializable
     private $iterator;
 
     /**
-     * @param array     $data
      * @param string    $type
+     * @param array     $data
      */
-    public function __construct(array $data, string $type)
+    public function __construct(string $type, array $data)
     {
-        $this->data = $data;
         $this->type = $type;
+        $this->data = $data;
 
         $this->iterator = new \ArrayIterator($data);
     }

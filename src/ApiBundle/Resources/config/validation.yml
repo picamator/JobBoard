@@ -1,0 +1,25 @@
+ApiBundle\Model\Request\Data\Pagination:
+  properties:
+    startAt:
+      - NotBlank: ~
+      - GreaterThanOrEqual: 1
+    maxPerPage:
+      - NotBlank: ~
+      - ApiBundle\Validator\Constraints\MaxPerPageLimit:
+          limit: 200
+
+ApiBundle\Model\Request\Data\JobPosting:
+  properties:
+    title:
+      - NotBlank: ~
+      - Length:
+          min: 4
+          max: 255
+    description:
+      - NotBlank: ~
+      - Length:
+          min: 64
+          max: 655360
+    email:
+      - NotBlank: ~
+      - Email: ~

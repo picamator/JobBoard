@@ -1,6 +1,19 @@
 JobBoard
 ========
 
+[![PHP 7 ready](http://php7ready.timesplinter.ch/picamator/JobBoard/badge.svg)](https://travis-ci.org/picamator/JobBoard)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/07268f8a-13e0-4760-93c9-2c76bd4204ca/big.png)](https://insight.sensiolabs.com/projects/07268f8a-13e0-4760-93c9-2c76bd4204ca)
+
+Master
+------
+[![Build Status](https://travis-ci.org/picamator/JobBoard.svg?branch=master)](https://travis-ci.org/picamator/JobBoard)
+[![Coverage Status](https://coveralls.io/repos/github/picamator/JobBoard/badge.svg?branch=master)](https://coveralls.io/github/picamator/JobBoard?branch=master)
+
+Dev
+---
+[![Build Status](https://travis-ci.org/picamator/JobBoard.svg?branch=dev)](https://travis-ci.org/picamator/JobBoard)
+[![Coverage Status](https://coveralls.io/repos/github/picamator/JobBoard/badge.svg?branch=dev)](https://coveralls.io/github/picamator/JobBoard?branch=dev)
+
 Job Board platform with straightforward workflow.
 Here is the main characteristics:
 
@@ -86,10 +99,10 @@ job                 | GET, POST, PUT, DELETE
 #### GET:job
 Request Parameters:
 
-Name        | Data Type | Default value | Description
----         | ---       | ---           | ---
-page        | integer   | 1             | Page number. Part of pagination.
-maxPerPage  | integer   | 20            | Max number of jobs on one page. Part of pagination.
+Name        | Data Type | Default value | Max value | Description
+---         | ---       | ---           | ---       |---
+startAt     | integer   | 1             | -         | Page number. Part of pagination.
+maxPerPage  | integer   | 20            | 100       | Max number of jobs on one page. Part of pagination.
 
 Request Body:
 
@@ -136,6 +149,13 @@ Request Body:
 
 ```
 
+There is limitation over posing data.
+
+Name        | Limit
+---         | ---
+Title       | 4-255 characters
+Description | 64-655360 characters, the max value is equal 5Mb text
+
 Response Body:
 
 * Empty body
@@ -163,14 +183,13 @@ Response Body:
 ```json
 
 {
-  "data": [{
+  "data": {
     "id": 1,
     "title": "Job Title",
     "description": "Job description",
     "email": "publisher.email@domain.com",
     "publishedDate": "2016-11-15"
-  }],
-  "count": 1,
+  },
   "code": 200
 }
 
@@ -231,13 +250,37 @@ User interface contains with several pages:
 * Licence: licence page
 
 ### Command bus
-in-progress
+Command bus is a query mechanism to asynchronously run operations such as:
+
+* sending emails
+* logging
+ 
+Table bellow describes those commands:
+
+Channel                             | Message                                       
+---                                 | ---                                           
+publisher_email_awaiting_moderation | Identifier from table job_pool       
+moderator_email_awaiting_moderation | Identifier from table job_pool       
+application_error                   | Text message or small json serialized  string
 
 ### Events
-in-progress
+Events are extension points for Managers in other words it's possible to execute code `before` and `after` each Managers method.
+For each `before` event original requested parameters are passed. For all `after` the execution result;
 
 ### Publisher statuses
-in-progress
+Publisher can be in on of those statuses:
+
+* Inactive - Job was moderated but rejected, Publisher can post job for further moderation
+* Active - Publisher can post job without moderation
+* Awaiting Moderation - Publisher is under moderation, any attempt to publish job will be rejected
+
+Table bellow show map how Publisher's statuses changes:
+
+                    | Inactive  | Active    | Awaiting Moderation 
+---                 | ---       | ---       | ---
+Inactive            | +         | +         | +   
+Active              | -         | +         | -
+Awaiting Moderation | +         | +         | +  
 
 #### Endpoint
 The API endpoint is `http://job-board.dev:8081`

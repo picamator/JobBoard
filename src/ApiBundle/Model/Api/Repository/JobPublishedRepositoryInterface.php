@@ -11,14 +11,12 @@ interface JobPublishedRepositoryInterface
     /**
      * Find page
      *
-     * @param int $maxPerPage
      * @param int $startAt
+     * @param int $maxPerPage
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
      */
-    public function findPage(int $maxPerPage, int $startAt) : array;
+    public function findPage(int $startAt, int $maxPerPage) : array;
 
     /**
      * Get total

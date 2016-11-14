@@ -1,5 +1,5 @@
 <?php
-namespace ApiBundle\Model\Api\Resopnse;
+namespace ApiBundle\Model\Api\Response;
 
 use ApiBundle\Model\Api\Response\Data\CollectionInterface;
 use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;

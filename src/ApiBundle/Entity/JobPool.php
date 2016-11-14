@@ -55,7 +55,7 @@ class JobPool implements JobPoolInterface
     /**
      * @var \ApiBundle\Entity\JobStatus
      */
-    private $jobStatus;
+    private $job_status;
 
     /**
      * Get id
@@ -238,13 +238,13 @@ class JobPool implements JobPoolInterface
     /**
      * Set jobStatus
      *
-     * @param \ApiBundle\Entity\JobStatus $jobStatus
+     * @param \ApiBundle\Entity\JobStatus $job_status
      *
      * @return JobPoolInterface
      */
-    public function setJobStatus(\ApiBundle\Entity\JobStatus $jobStatus = null) : JobPoolInterface
+    public function setJobStatus(\ApiBundle\Entity\JobStatus $job_status = null) : JobPoolInterface
     {
-        $this->jobStatus = $jobStatus;
+        $this->job_status = $job_status;
 
         return $this;
     }
@@ -256,6 +256,6 @@ class JobPool implements JobPoolInterface
      */
     public function getJobStatus()
     {
-        return $this->jobStatus;
+        return $this->job_status;
     }
 }

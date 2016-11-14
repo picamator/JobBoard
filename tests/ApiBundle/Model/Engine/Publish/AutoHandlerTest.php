@@ -32,9 +32,9 @@ class AutoHandlerTest extends BaseTest
     private $jobFactoryMock;
 
     /**
-     * @var \ApiBundle\Model\Api\Response\CollectionFactoryInterface | \PHPUnit_Framework_MockObject_MockObject
+     * @var \ApiBundle\Model\Api\Response\JobSeparatedFactoryInterface | \PHPUnit_Framework_MockObject_MockObject
      */
-    private $collectionFactoryMock;
+    private $jobSeparatedFactoryMock;
 
     /**
      * @var \ApiBundle\Model\Api\Entity\PublisherInterface | \PHPUnit_Framework_MockObject_MockObject
@@ -61,7 +61,7 @@ class AutoHandlerTest extends BaseTest
         $this->jobFactoryMock = $this->getMockBuilder('ApiBundle\Model\Api\Response\JobFactoryInterface')
             ->getMock();
 
-        $this->collectionFactoryMock = $this->getMockBuilder('ApiBundle\Model\Api\Response\CollectionFactoryInterface')
+        $this->jobSeparatedFactoryMock = $this->getMockBuilder('ApiBundle\Model\Api\Response\JobSeparatedFactoryInterface')
             ->getMock();
 
         $this->publisherMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherInterface')
@@ -75,7 +75,7 @@ class AutoHandlerTest extends BaseTest
             $this->publisherStatusManagerMock,
             $this->jobPublishedManagerMock,
             $this->jobFactoryMock,
-            $this->collectionFactoryMock
+            $this->jobSeparatedFactoryMock
         );
     }
 
@@ -90,7 +90,7 @@ class AutoHandlerTest extends BaseTest
             ->method('autoPublish');
         $this->jobFactoryMock->expects($this->never())
             ->method('create');
-        $this->collectionFactoryMock->expects($this->never())
+        $this->jobSeparatedFactoryMock->expects($this->never())
             ->method('create');
 
 
@@ -119,7 +119,7 @@ class AutoHandlerTest extends BaseTest
             ->method('autoPublish');
         $this->jobFactoryMock->expects($this->never())
             ->method('create');
-        $this->collectionFactoryMock->expects($this->never())
+        $this->jobSeparatedFactoryMock->expects($this->never())
             ->method('create');
 
 
@@ -160,14 +160,14 @@ class AutoHandlerTest extends BaseTest
             ->with($this->equalTo($jobPublishedMock))
             ->willReturn($jobMock);
 
-        // job collection factory mock
-        $collectionMock = $this->getMockBuilder('ApiBundle\Model\Api\Response\Data\CollectionInterface')
+        // job separated factory mock
+        $jobSeparated = $this->getMockBuilder('ApiBundle\Model\Api\Response\Data\JobSeparatedInterface')
             ->getMock();
 
-        $this->collectionFactoryMock->expects($this->once())
+        $this->jobSeparatedFactoryMock->expects($this->once())
             ->method('create')
-            ->with($this->equalTo('ApiBundle\Model\Api\Response\Data\JobInterface'), $this->equalTo([$jobMock]))
-            ->willReturn($collectionMock);
+            ->with($this->equalTo($jobMock))
+            ->willReturn($jobSeparated);
 
         $this->handler->handle($this->publisherMock, $this->jobPoolMock);
     }

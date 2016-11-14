@@ -3,7 +3,8 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Model\Response;
 
-use ApiBundle\Model\Api\Resopnse\JobCollectionBuilderInterface;
+use ApiBundle\Model\Api\ObjectManagerInterface;
+use ApiBundle\Model\Api\Response\JobCollectionBuilderInterface;
 use ApiBundle\Model\Api\Response\Data\CollectionInterface;
 use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
 
@@ -89,12 +90,14 @@ class JobCollectionBuilder implements JobCollectionBuilderInterface
      */
     public function build() : JobCollectionInterface
     {
-        $data = array_filter($this->data);
+        $data = array_filter($this->data, function($item) {
+            return !is_null($item);
+        });
         if (count($data) !== count($this->data)) {
             throw new RuntimeException('Required data was not set. All setters should be filled');
         }
 
-        /** @var SearchResultInterface $result */
+        /** @var JobCollectionInterface $result */
         $result = $this->objectManager->create($this->className, $this->data);
         $this->cleanData();
 

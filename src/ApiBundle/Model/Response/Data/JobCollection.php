@@ -11,25 +11,10 @@ use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
  *
  * @codeCoverageIgnore
  */
-class JobCollection implements JobCollectionInterface
+class JobCollection implements JobCollectionInterface, \JsonSerializable
 {
     /**
-     * @var int
-     */
-    private $maxPerPage;
-
-    /**
-     * @var int
-     */
-    private $total;
-
-    /**
-     * @var int
-     */
-    private $startAt;
-
-    /**
-     * @var CollectionInterface
+     * @var array
      */
     private $data;
 
@@ -45,10 +30,13 @@ class JobCollection implements JobCollectionInterface
         int $startAt,
         int $total
     ) {
-        $this->data         = $data;
-        $this->maxPerPage   = $maxPerPage;
-        $this->startAt      = $startAt;
-        $this->total        = $total;
+        $this->data = [
+            'data'          => $data,
+            'maxPerPage'    => $maxPerPage,
+            'startAt'       => $startAt,
+            'total'         => $total,
+            'code'          => 200,
+        ];
     }
 
     /**
@@ -56,7 +44,7 @@ class JobCollection implements JobCollectionInterface
      */
     public function getIterator()
     {
-        return $this->data->getIterator();
+        return $this->data['data']->getIterator();
     }
 
     /**
@@ -64,7 +52,7 @@ class JobCollection implements JobCollectionInterface
      */
     public function getMaxPerPage() : int
     {
-        return $this->maxPerPage;
+        return $this->data['maxPerPage'];
     }
 
     /**
@@ -72,7 +60,7 @@ class JobCollection implements JobCollectionInterface
      */
     public function getTotal() : int
     {
-        return $this->total;
+        return $this->data['total'];
     }
 
     /**
@@ -80,13 +68,29 @@ class JobCollection implements JobCollectionInterface
      */
     public function getStartAt() : int
     {
-        return $this->startAt;
+        return $this->data['startAt'];
     }
 
     /**
      * {@inheritdoc}
      */
     public function getData() : CollectionInterface
+    {
+        return $this->data['data'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode() : int
+    {
+        return $this->data['code'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
     {
         return $this->data;
     }

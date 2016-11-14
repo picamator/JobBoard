@@ -1,12 +1,14 @@
 <?php
+declare(strict_types = 1);
+
 namespace ApiBundle\Model\Engine\Publish;
 
 use ApiBundle\Model\Api\Entity\JobPoolInterface;
 use ApiBundle\Model\Api\Entity\PublisherInterface;
 use ApiBundle\Model\Api\Manager\JobPublishedManagerInterface;
 use ApiBundle\Model\Api\Manager\PublisherStatusManagerInterface;
-use ApiBundle\Model\Api\Response\CollectionFactoryInterface;
 use ApiBundle\Model\Api\Response\JobFactoryInterface;
+use ApiBundle\Model\Api\Response\JobSeparatedFactoryInterface;
 use ApiBundle\Model\Engine\AbstractPublishHandler;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -36,29 +38,29 @@ class AutoHandler extends AbstractPublishHandler
     private $jobFactory;
 
     /**
-     * @var CollectionFactoryInterface
+     * @var JobSeparatedFactoryInterface
      */
-    private $collectionFactory;
+    private $jobSeparatedFactory;
 
     /**
      * @param EntityManagerInterface            $entityManager
      * @param PublisherStatusManagerInterface   $publisherStatusManager
      * @param JobPublishedManagerInterface      $jobPublishedManager
      * @param JobFactoryInterface               $jobFactory
-     * @param CollectionFactoryInterface        $collectionFactory
+     * @param JobSeparatedFactoryInterface      $jobSeparatedFactory
      */
     public function __construct(
        EntityManagerInterface           $entityManager,
        PublisherStatusManagerInterface  $publisherStatusManager,
        JobPublishedManagerInterface     $jobPublishedManager,
        JobFactoryInterface              $jobFactory,
-       CollectionFactoryInterface       $collectionFactory
+       JobSeparatedFactoryInterface     $jobSeparatedFactory
     ) {
         $this->entityManager            = $entityManager;
         $this->publisherStatusManager   = $publisherStatusManager;
         $this->jobPublishedManager      = $jobPublishedManager;
         $this->jobFactory               = $jobFactory;
-        $this->collectionFactory        = $collectionFactory;
+        $this->jobSeparatedFactory      = $jobSeparatedFactory;
     }
 
     /**
@@ -84,6 +86,6 @@ class AutoHandler extends AbstractPublishHandler
 
         $job = $this->jobFactory->create($jobPublished);
 
-        return $this->collectionFactory->create('ApiBundle\Model\Api\Response\Data\JobInterface', [$job]);
+        return $this->jobSeparatedFactory->create($job);
     }
 }

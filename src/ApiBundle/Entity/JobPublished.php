@@ -46,7 +46,7 @@ class JobPublished implements JobPublishedInterface
     /**
      * @var \ApiBundle\Entity\JobPool
      */
-    private $jobPool;
+    private $job_pool;
 
     /**
      * Get id
@@ -181,13 +181,13 @@ class JobPublished implements JobPublishedInterface
     /**
      * Set jobPool
      *
-     * @param JobPoolInterface $jobPool
+     * @param JobPoolInterface $job_pool
      *
      * @return JobPublishedInterface
      */
-    public function setJobPool(JobPoolInterface $jobPool = null) : JobPublishedInterface
+    public function setJobPool(JobPoolInterface $job_pool = null) : JobPublishedInterface
     {
-        $this->jobPool = $jobPool;
+        $this->job_pool = $job_pool;
 
         return $this;
     }
@@ -199,6 +199,6 @@ class JobPublished implements JobPublishedInterface
      */
     public function getJobPool()
     {
-        return $this->jobPool;
+        return $this->job_pool;
     }
 }

@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace ApiBundle\Model\Engine\Publish;
 
 use ApiBundle\Model\Api\Response\ErrorBuilderInterface;
@@ -50,11 +52,11 @@ class NoProceedHandler extends AbstractPublishHandler
     protected function process(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         // send task
-        $message = [
+        $taskMessage = [
             'publisher' => $publisher->getEmail(),
             'jobPoolId' => $jobPool->getId()
         ];
-        $this->task->addTask(self::$taskError, json_encode($message));
+        $this->task->addTask(self::$taskError, json_encode($taskMessage));
 
         // build error message
         $this->errorBuilder->setCode(500)

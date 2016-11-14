@@ -40,7 +40,7 @@ class Publisher implements PublisherInterface
     /**
      * @var \ApiBundle\Entity\PublisherStatus
      */
-    private $publisherStatus;
+    private $publisher_status;
 
     /**
      * Get id
@@ -151,13 +151,13 @@ class Publisher implements PublisherInterface
     /**
      * Set publisherStatus
      *
-     * @param \ApiBundle\Entity\PublisherStatus $publisherStatus
+     * @param \ApiBundle\Entity\PublisherStatus $publisher_status
      *
      * @return PublisherInterface
      */
-    public function setPublisherStatus(\ApiBundle\Entity\PublisherStatus $publisherStatus = null) : PublisherInterface
+    public function setPublisherStatus(\ApiBundle\Entity\PublisherStatus $publisher_status = null) : PublisherInterface
     {
-        $this->publisherStatus = $publisherStatus;
+        $this->publisher_status = $publisher_status;
 
         return $this;
     }
@@ -169,6 +169,6 @@ class Publisher implements PublisherInterface
      */
     public function getPublisherStatus()
     {
-        return $this->publisherStatus;
+        return $this->publisher_status;
     }
 }

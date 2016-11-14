@@ -1,4 +1,7 @@
 services:
+  object_manager:
+    class: ApiBundle\Model\ObjectManager
+
   publisher_status_manager:
     class: ApiBundle\Model\Manager\PublisherStatusManager
     arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:PublisherStatus')"]
@@ -6,3 +9,59 @@ services:
   job_status_manager:
     class: ApiBundle\Model\Manager\JobStatusManager
     arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:JobStatus')"]
+
+  # response
+  response_error_builder:
+    class: ApiBundle\Model\Response\ErrorBuilder
+    arguments: ["@object_manager"]
+
+  response_job_collection_builder:
+    class: ApiBundle\Model\Response\JobCollectionBuilder
+    arguments: ["@object_manager"]
+
+  response_collection_factory:
+    class: ApiBundle\Model\Response\CollectionFactory
+    arguments: ["@object_manager"]
+
+  response_job_builder:
+    class: ApiBundle\Model\Response\JobBuilder
+    arguments: ["@object_manager"]
+
+  response_job_factory:
+    class: ApiBundle\Model\Response\JobFactory
+    arguments: ["@response_job_builder"]
+
+  # engine
+  engine_job_pagination:
+    class: ApiBundle\Model\Engine\JobPagination
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:JobPublished')", "@response_job_collection_builder", "@response_collection_factory", "@response_job_factory"]
+
+  # command
+  command_task:
+    class: ApiBundle\Model\Command\Task
+
+  # request
+  request_pagination_factory:
+    class: ApiBundle\Model\Request\PaginationFactory
+    arguments: ["@object_manager"]
+
+  # services
+  service_controller_error_exeption:
+    class: ApiBundle\Service\Controller\Error\ExceptionService
+    arguments: ["@command_task", "@response_error_builder"]
+
+  service_controller_error_bad_request:
+    class: ApiBundle\Service\Controller\Error\BadRequestService
+    arguments: ["@response_error_builder"]
+
+  service_job_get:
+    class: ApiBundle\Service\Controller\Job\GetService
+    arguments: ["@=container"]
+
+  service_error_render:
+    class: ApiBundle\Service\ErrorRenderService
+    arguments: ["@=container"]
+
+  service_job_post:
+    class: ApiBundle\Service\Controller\Job\PostService
+    arguments: ["@=container"]

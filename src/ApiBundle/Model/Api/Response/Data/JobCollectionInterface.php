@@ -33,4 +33,11 @@ interface JobCollectionInterface extends \IteratorAggregate
      * @return CollectionInterface
      */
     public function getData() : CollectionInterface;
+
+    /**
+     * Get code
+     *
+     * @return int
+     */
+    public function getCode() : int;
 }

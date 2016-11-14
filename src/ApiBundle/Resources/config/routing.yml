@@ -1,3 +1,6 @@
 api_homepage:
     path:     /
     defaults: { _controller: ApiBundle:Default:index }
+job:
+    type:     rest
+    resource: ApiBundle\Controller\JobController

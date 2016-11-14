@@ -77,7 +77,7 @@ class Job implements JobInterface, \JsonSerializable
      */
     public function getPublishedDate() : string
     {
-        return $this->data['PublishedDate'];
+        return $this->data['publishedDate'];
     }
 
     /**

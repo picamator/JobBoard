@@ -45,8 +45,7 @@ class JobToken implements JobTokenInterface
     /**
      * @var \ApiBundle\Entity\JobPool
      */
-    private $jobPool;
-
+    private $job_pool;
 
     /**
      * Get id
@@ -181,13 +180,13 @@ class JobToken implements JobTokenInterface
     /**
      * Set jobPool
      *
-     * @param \ApiBundle\Entity\JobPool $jobPool
+     * @param \ApiBundle\Entity\JobPool $job_pool
      *
      * @return JobTokenInterface
      */
-    public function setJobPool(\ApiBundle\Entity\JobPool $jobPool = null) : JobTokenInterface
+    public function setJobPool(\ApiBundle\Entity\JobPool $job_pool = null) : JobTokenInterface
     {
-        $this->jobPool = $jobPool;
+        $this->job_pool = $job_pool;
 
         return $this;
     }
@@ -199,6 +198,6 @@ class JobToken implements JobTokenInterface
      */
     public function getJobPool()
     {
-        return $this->jobPool;
+        return $this->job_pool;
     }
 }

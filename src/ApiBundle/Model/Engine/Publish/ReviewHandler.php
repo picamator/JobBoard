@@ -1,4 +1,6 @@
 <?php
+declare(strict_types = 1);
+
 namespace ApiBundle\Model\Engine\Publish;
 
 use ApiBundle\Model\Api\Command\TaskInterface;

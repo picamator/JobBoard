@@ -17,15 +17,9 @@ class JobPublishedRepository extends EntityRepository  implements JobPublishedRe
     /**
      * {@inheritdoc}
      */
-    public function findPage(int $maxPerPage, int $startAt) : array
+    public function findPage(int $startAt, int $maxPerPage) : array
     {
-        if ($startAt <= 0) {
-            throw new InvalidArgumentException(
-                sprintf('Invalid startAt "%s". Please put correct parameter represents page number started from 1.', $startAt)
-            );
-        }
-
-        $firstResult = $maxPerPage * ($startAt - 1);
+        $firstResult = $maxPerPage * abs($startAt - 1);
         $query = $this->createQueryBuilder('jp')
             ->addSelect('jp.id')
             ->addSelect('jp.title')
