@@ -1,5 +1,6 @@
 {
     "name": "picamator/job-board",
+    "description": "Job Board prototype"
     "license": "MIT",
     "type": "project",
     "autoload": {

@@ -3,6 +3,7 @@ namespace ApiBundle\Model\Api\Response;
 
 use ApiBundle\Model\Api\Response\Data\CollectionInterface;
 use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
+use ApiBundle\Model\Exception\RuntimeException;
 
 /**
  * Build Job collection
@@ -50,6 +51,8 @@ interface JobCollectionBuilderInterface
      * Build
      *
      * @return JobCollectionInterface
+     *
+     * @throws RuntimeException
      */
     public function build() : JobCollectionInterface;
 }

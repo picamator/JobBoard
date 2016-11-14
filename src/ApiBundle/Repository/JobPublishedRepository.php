@@ -3,9 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Repository;
 
-use ApiBundle\Model\Api\Entity\JobPublishedInterface;
 use ApiBundle\Model\Api\Repository\JobPublishedRepositoryInterface;
-use ApiBundle\Model\Exception\InvalidArgumentException;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 

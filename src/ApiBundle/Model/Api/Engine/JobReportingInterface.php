@@ -2,8 +2,6 @@
 namespace ApiBundle\Model\Api\Engine;
 
 use ApiBundle\Model\Api\Request\Data\JobPostingInterface;
-use ApiBundle\Model\Api\Response\Data\ErrorInterface;
-use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
 
 /**
  * Job Reporting
@@ -15,7 +13,7 @@ interface JobReportingInterface
      *
      * @param JobPostingInterface $jopPosting
      *
-     * @return JobCollectionInterface | ErrorInterface
+     * @return \ApiBundle\Model\Api\Response\Data\JobCollectionInterface | \ApiBundle\Model\Api\Response\Data\ErrorInterface
      */
     public function report(JobPostingInterface $jopPosting);
 }

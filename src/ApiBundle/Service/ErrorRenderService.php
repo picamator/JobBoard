@@ -5,6 +5,7 @@ namespace ApiBundle\Service;
 
 use ApiBundle\Model\Api\Response\Data\ErrorInterface;
 use ApiBundle\Service\Controller\Error\BadRequestService;
+use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Validator\ConstraintViolationInterface;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
 

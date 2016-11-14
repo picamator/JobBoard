@@ -7,6 +7,7 @@ use ApiBundle\Model\Api\ObjectManagerInterface;
 use ApiBundle\Model\Api\Response\JobCollectionBuilderInterface;
 use ApiBundle\Model\Api\Response\Data\CollectionInterface;
 use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
+use ApiBundle\Model\Exception\RuntimeException;
 
 /**
  * Build Job collection

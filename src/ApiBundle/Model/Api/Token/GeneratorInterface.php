@@ -1,9 +1,6 @@
 <?php
 namespace ApiBundle\Model\Api\Token;
 
-use ApiBundle\Model\Exception\InvalidArgumentException;
-use ApiBundle\Model\Exception\RuntimeException;
-
 /**
  * Token generator
  */
@@ -16,7 +13,7 @@ interface GeneratorInterface
      *
      * @return string
      *
-     * @throws InvalidArgumentException | RuntimeException
+     * @throws \ApiBundle\Model\Exception\InvalidArgumentException | \ApiBundle\Model\Exception\RuntimeException
      */
     public function generate(int $length) : string;
 }

@@ -1,8 +1,6 @@
 <?php
 namespace ApiBundle\Model\Api\Repository;
 
-use ApiBundle\Model\Exception\InvalidArgumentException;
-
 /**
  * Job Published repository
  */

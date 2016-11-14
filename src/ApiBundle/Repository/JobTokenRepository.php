@@ -3,7 +3,6 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Repository;
 
-use ApiBundle\Model\Api\Entity\JobTokenInterface;
 use ApiBundle\Model\Api\Repository\JobTokenRepositoryInterface;
 use Doctrine\ORM\EntityRepository;
 

@@ -5,8 +5,6 @@ namespace ApiBundle\Service\Controller\Job;
 
 use ApiBundle\Model\Api\Engine\JobReportingInterface;
 use ApiBundle\Model\Api\Request\JobPostingFactoryInterface;
-use ApiBundle\Model\Api\Response\Data\ErrorInterface;
-use ApiBundle\Model\Api\Response\Data\JobSeparatedInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -39,7 +37,7 @@ class PostService
      *
      * @param string $content
      *
-     * @return ErrorInterface | JobSeparatedInterface
+     * @return \ApiBundle\Model\Api\Response\Data\ErrorInterface | \ApiBundle\Model\Api\Response\Data\JobSeparatedInterface
      */
     public function postJob(string $content)
     {

@@ -16,25 +16,16 @@ class JobPublishedSubject implements JobPublishedManagerInterface, SubjectInterf
     use SubjectTrait;
 
     /**
-     * @var EntityManager
-     */
-    private $entityManager;
-
-    /**
      * @var JobPublishedManagerInterface
      */
     private $jobPublishedManager;
 
     /**
-     * @param EntityManager                   $entityManager,
      * @param JobPublishedManagerInterface    $jobPublishedManager
      */
-    public function __construct(
-        EntityManager                   $entityManager,
-        JobPublishedManagerInterface    $jobPublishedManager
-    ) {
-        $this->entityManager        = $entityManager;
-        $this->jobPublishedManager  = $jobPublishedManager;
+    public function __construct(JobPublishedManagerInterface $jobPublishedManager)
+    {
+        $this->jobPublishedManager = $jobPublishedManager;
     }
 
     /**

@@ -2,6 +2,7 @@
 namespace ApiBundle\Model\Event;
 
 use ApiBundle\Model\Api\Event\ObserverInterface;
+use ApiBundle\Model\Api\Event\SubjectInterface;
 
 /**
  * Subject, part of observer pattern implementation

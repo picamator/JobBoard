@@ -7,10 +7,7 @@ use ApiBundle\Model\Api\Engine\JobReportingInterface;
 use ApiBundle\Model\Api\Engine\PublishHandlerInterface;
 use ApiBundle\Model\Api\Entity\JobPoolInterface;
 use ApiBundle\Model\Api\Manager\PublisherManagerInterface;
-use ApiBundle\Model\Api\ObjectManagerInterface;
 use ApiBundle\Model\Api\Request\Data\JobPostingInterface;
-use ApiBundle\Model\Api\Response\Data\ErrorInterface;
-use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
 
 /**
  * Job Reporting

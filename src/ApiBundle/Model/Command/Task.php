@@ -14,6 +14,5 @@ class Task implements TaskInterface
     public function addTask(string $name, $data) : TaskInterface
     {
         // @todo in-progress
-       // var_dump('In Progress: Task was executed', $name, $data);
     }
 }

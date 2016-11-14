@@ -5,8 +5,6 @@ namespace ApiBundle\Service\Controller\Job;
 
 use ApiBundle\Model\Api\Engine\JobPaginationInterface;
 use ApiBundle\Model\Api\Request\PaginationFactoryInterface;
-use ApiBundle\Model\Api\Response\Data\ErrorInterface;
-use ApiBundle\Model\Api\Response\Data\JobCollectionInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -35,7 +33,7 @@ class GetService
      * @param int $startAt
      * @param int $maxPerPage
      *
-     * @return ErrorInterface | JobCollectionInterface
+     * @return \ApiBundle\Model\Api\Response\Data\ErrorInterface | \ApiBundle\Model\Api\Response\Data\JobCollectionInterface
      */
     public function getJob($startAt, $maxPerPage)
     {
