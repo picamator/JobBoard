@@ -16,7 +16,7 @@ class PostService
     /**
      * @var string
      */
-    private static $errorMessageEmpty = 'Con not save your posting. Job has empty content. Please Check your request and try again.';
+    private static $errorMessageEmpty = 'Con not save your posting. Job has empty content. Please check your request and try again.';
 
     /**
      * @var Container
@@ -41,7 +41,7 @@ class PostService
      */
     public function postJob(string $content)
     {
-        $content = json_encode($content, true);
+        $content = json_decode($content, true);
         if (!$content) {
             $badRequest = $this->container->get('service_controller_error_bad_request');
 

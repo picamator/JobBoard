@@ -83,14 +83,10 @@ class ReviewHandler extends AbstractPublishHandler
      */
     protected function process(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
-        // neither new
-        if (!$publisher->getId()) {
-            return null;
-        }
-
         // neither inactive
-        $status = $this->publisherStatusManager->getInactive();
-        if ($publisher->getPublisherStatusId() !== $status) {
+        $status           = $this->publisherStatusManager->getInactive();
+        $publisherStatus  = $publisher->getPublisherStatusId();
+        if (!in_array($publisherStatus, [$status, null])) {
             return null;
         }
 

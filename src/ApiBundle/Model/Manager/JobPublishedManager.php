@@ -70,6 +70,8 @@ class JobPublishedManager implements JobPublishedManagerInterface
         $jobPool->setJobStatusId($activeStatus)
             ->setPublisher($publisher);
 
+        $this->entityManager->persist($jobPool);
+
         // job published
         $jobPublished = $this->getJobPublished($publisher, $jobPool);
         $jobPublished->setJobPool($jobPool);

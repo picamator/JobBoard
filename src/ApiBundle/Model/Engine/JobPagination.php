@@ -64,7 +64,6 @@ class JobPagination implements JobPaginationInterface
         $jobList = $this->jobPublishedRepository->findPage($pagination->getStartAt(), $pagination->getMaxPerPage());
         $total   = empty($jobList) ? 0 : $this->jobPublishedRepository->getTotal();
 
-
         $data = [];
         /** @var JobPublishedInterface $item */
         foreach($jobList as $item) {

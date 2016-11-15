@@ -18,11 +18,7 @@ class JobPoolRepository extends EntityRepository  implements JobPoolRepositoryIn
     {
         $query = $this->createQueryBuilder('jp')
             ->select('jp')
-            ->addSelect('jp.id')
-            ->addSelect('jp.publisherId')
-            ->addSelect('jp.jobStatusId')
-            ->addSelect('jp.title')
-            ->addSelect('jp.description')
+            ->select('partial jp.{id, publisherId, jobStatusId, title, description}')
             ->where('jp.id = ?1')
             ->setParameter(1, $id)
             ->getQuery();

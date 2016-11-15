@@ -17,10 +17,7 @@ class PublisherStatusRepository extends EntityRepository implements PublisherSta
     public function findStatus(string $slug)
     {
         $query = $this->createQueryBuilder('ps')
-            ->select('ps')
-            ->addSelect('ps.id')
-            ->addSelect('ps.slug')
-            ->addSelect('ps.name')
+            ->select('partial ps.{id, slug, name}')
             ->where('ps.slug = ?1')
             ->setParameter(1, $slug)
             ->getQuery();
@@ -28,6 +25,6 @@ class PublisherStatusRepository extends EntityRepository implements PublisherSta
         $query->useResultCache(true);
         $result = $query->getOneOrNullResult();
 
-        return $result[0] ?? null;
+        return $result ?? null;
     }
 }

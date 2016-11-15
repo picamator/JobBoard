@@ -6,7 +6,11 @@ use ApiBundle\Service\Controller\Job\PostService;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
+use FOS\RestBundle\Controller\Annotations\RouteResource;
 
+/**
+ * @RouteResource("Job")
+ */
 class JobController extends FOSRestController implements ClassResourceInterface
 {
     /**

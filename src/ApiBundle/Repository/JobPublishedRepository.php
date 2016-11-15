@@ -19,11 +19,7 @@ class JobPublishedRepository extends EntityRepository  implements JobPublishedRe
     {
         $firstResult = $maxPerPage * abs($startAt - 1);
         $query = $this->createQueryBuilder('jp')
-            ->addSelect('jp.id')
-            ->addSelect('jp.title')
-            ->addSelect('jp.description')
-            ->addSelect('jp.email')
-            ->addSelect('jp.createdAt')
+            ->select('partial jp.{id, title, description, email, createdAt}')
             ->setMaxResults($maxPerPage)
             ->setFirstResult($firstResult)
             ->getQuery();
@@ -42,12 +38,13 @@ class JobPublishedRepository extends EntityRepository  implements JobPublishedRe
     public function getTotal() : int
     {
         $query = $this->createQueryBuilder('jp')
-            ->addSelect('COUNT(*) as count')
+            ->select('COUNT(jp)')
             ->getQuery();
 
         try {
-            return $query->useResultCache(false)
-                ->getSingleResult();
+            return (int) $query->useResultCache(false)
+                ->getSingleScalarResult();
+
         } catch (NoResultException $e) {
             return 0;
         }

@@ -79,28 +79,8 @@ class ReviewHandlerTest extends BaseTest
         );
     }
 
-    public function testSkipNoIdHandle()
-    {
-        // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getId');
-
-        // never
-        $this->jobPoolManagerMock->expects($this->never())
-            ->method('saveForReview');
-        $this->errorBuilderMock->expects($this->never())
-            ->method('build');
-
-        $this->handler->handle($this->publisherMock, $this->jobPoolMock);
-    }
-
     public function testSkipNoInactiveHandle()
     {
-        // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getId')
-            ->willReturn(1);
-
         // publisher status manager mock
         $this->publisherStatusManagerMock->expects($this->once())
             ->method('getInactive')
@@ -122,11 +102,6 @@ class ReviewHandlerTest extends BaseTest
 
     public function testHandle()
     {
-        // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getId')
-            ->willReturn(1);
-
         // publisher status manager mock
         $this->publisherStatusManagerMock->expects($this->once())
             ->method('getInactive')

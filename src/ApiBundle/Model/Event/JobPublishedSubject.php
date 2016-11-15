@@ -6,7 +6,6 @@ use ApiBundle\Model\Api\Entity\JobPublishedInterface;
 use ApiBundle\Model\Api\Entity\PublisherInterface;
 use ApiBundle\Model\Api\Event\SubjectInterface;
 use ApiBundle\Model\Api\Manager\JobPublishedManagerInterface;
-use Doctrine\ORM\EntityManager;
 
 /**
  * Job Published subject

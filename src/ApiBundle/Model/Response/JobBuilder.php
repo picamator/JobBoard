@@ -26,7 +26,7 @@ class JobBuilder implements JobBuilderInterface
         'title'             => null,
         'description'       => null,
         'email'             => null,
-        'publicationDate'   => null,
+        'publishedDate'     => null,
     ];
 
     /**

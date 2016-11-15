@@ -17,10 +17,7 @@ class JobStatusRepository extends EntityRepository implements JobStatusRepositor
     public function findStatus(string $slug)
     {
         $query = $this->createQueryBuilder('js')
-            ->select('js')
-            ->addSelect('js.id')
-            ->addSelect('js.slug')
-            ->addSelect('js.name')
+            ->select('partial js.{id, slug, name}')
             ->where('js.slug = ?1')
             ->setParameter(1, $slug)
             ->getQuery();
@@ -28,6 +25,6 @@ class JobStatusRepository extends EntityRepository implements JobStatusRepositor
         $query->useResultCache(true);
         $result = $query->getOneOrNullResult();
 
-        return $result[0] ?? null;
+        return $result ?? null;
     }
 }

@@ -51,7 +51,7 @@ class GetService
         }
 
         /** @var JobPaginationInterface $engine */
-        $engine = $this->container->get('engine_job_reporting');
+        $engine = $this->container->get('engine_job_pagination');
 
         return $engine->getPage($pagination);
     }

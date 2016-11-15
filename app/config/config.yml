@@ -87,6 +87,10 @@ nelmio_cors:
         origin_regex: false
 
 # FOSRest Configuration
+services:
+  apibundle.util.inflector:
+    class: ApiBundle\Util\Inflector\NoopInflector
+
 fos_rest:
     body_listener: true
     format_listener:
@@ -97,3 +101,6 @@ fos_rest:
         view_response_listener: 'force'
         formats:
             json: true
+
+    service:
+      inflector: apibundle.util.inflector

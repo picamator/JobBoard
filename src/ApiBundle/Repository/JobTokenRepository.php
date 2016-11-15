@@ -17,11 +17,7 @@ class JobTokenRepository extends EntityRepository implements JobTokenRepositoryI
     public function findToken(int $jobPoolId)
     {
         $query = $this->createQueryBuilder('jt')
-            ->select('jt')
-            ->addSelect('jt.id')
-            ->addSelect('jt.token')
-            ->addSelect('jt.isActive')
-            ->addSelect('jt.jobPoolId')
+            ->select('partial jt.{id, jobPoolId, token, isActive}')
             ->where('jt.jobPoolId = ?1')
             ->setParameter(1, $jobPoolId)
             ->getQuery();

@@ -235,7 +235,7 @@ Code | Message                      | Description
 204  | 204 No Content               | Server successfully processed the request
 
 ### Database
-Database is in [EER diagram](doc/db/job_board.png).
+Database is in [EER diagram](doc/db/job_board.png). Database schema with test data is in [job_board.sql](doc/db/job_board.sql).
 
 ### UI
 User Interface communicate with REST API.

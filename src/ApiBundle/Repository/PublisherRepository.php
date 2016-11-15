@@ -4,11 +4,12 @@ declare(strict_types = 1);
 namespace ApiBundle\Repository;
 
 use ApiBundle\Model\Api\Repository\PublisherRepositoryInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Publisher repository
  */
-class PublisherRepository implements PublisherRepositoryInterface
+class PublisherRepository extends EntityRepository  implements PublisherRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -16,10 +17,7 @@ class PublisherRepository implements PublisherRepositoryInterface
     public function findPublisher(string $email)
     {
         $query = $this->createQueryBuilder('p')
-            ->select('p')
-            ->addSelect('p.id')
-            ->addSelect('p.publisherStatusId')
-            ->addSelect('p.email')
+            ->select('partial p.{id, publisherStatusId, email}')
             ->where('p.email = ?1')
             ->setParameter(1, $email)
             ->getQuery();
