@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Publisher Status repository
+ *
+ * @codeCoverageIgnore
  */
 class PublisherStatusRepository extends EntityRepository implements PublisherStatusRepositoryInterface
 {
@@ -23,8 +25,7 @@ class PublisherStatusRepository extends EntityRepository implements PublisherSta
             ->getQuery();
 
         $query->useResultCache(true);
-        $result = $query->getOneOrNullResult();
 
-        return $result ?? null;
+        return $query->getOneOrNullResult();
     }
 }

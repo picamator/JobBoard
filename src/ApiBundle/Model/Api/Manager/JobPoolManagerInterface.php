@@ -15,7 +15,7 @@ interface JobPoolManagerInterface
      * @param PublisherInterface    $publisher
      * @param JobPoolInterface      $jobPool
      *
-     * @return JobPoolInterface
+     * @return void
      */
-    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPoolInterface;
+    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool);
 }

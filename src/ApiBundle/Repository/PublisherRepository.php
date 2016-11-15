@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Publisher repository
+ *
+ * @codeCoverageIgnore
  */
 class PublisherRepository extends EntityRepository  implements PublisherRepositoryInterface
 {
@@ -17,14 +19,14 @@ class PublisherRepository extends EntityRepository  implements PublisherReposito
     public function findPublisher(string $email)
     {
         $query = $this->createQueryBuilder('p')
-            ->select('partial p.{id, publisherStatusId, email}')
+            ->select('partial p.{id, email}, partial ps.{id, slug}')
+            ->join('p.publisher_status', 'ps')
             ->where('p.email = ?1')
             ->setParameter(1, $email)
             ->getQuery();
 
-        $query->useResultCache(true);
-        $result = $query->getOneOrNullResult();
+        $query->useResultCache(false);
 
-        return $result[0] ?? null;
+        return $query->getOneOrNullResult();
     }
 }

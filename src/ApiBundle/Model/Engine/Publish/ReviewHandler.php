@@ -84,14 +84,15 @@ class ReviewHandler extends AbstractPublishHandler
     protected function process(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         // neither inactive
-        $status           = $this->publisherStatusManager->getInactive();
-        $publisherStatus  = $publisher->getPublisherStatusId();
-        if (!in_array($publisherStatus, [$status, null])) {
+        $statusInactive     = $this->publisherStatusManager->getInactive();
+        $publisherStatus    = $publisher->getPublisherStatus() ?? $statusInactive;
+
+        if ($publisherStatus->getId() !== $statusInactive->getId()) {
             return null;
         }
 
         /** @var JobPoolInterface $jobPool */
-        $jobPool = $this->entityManager->transactional(function() use ($publisher, $jobPool) {
+        $this->entityManager->transactional(function() use ($publisher, $jobPool) {
             return $this->jobPoolManager->saveForReview($publisher, $jobPool);
         });
 

@@ -63,11 +63,11 @@ class JobPublishedManager implements JobPublishedManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPublishedInterface
+    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         // job pool
         $activeStatus = $this->jobStatusManager->getPublished();
-        $jobPool->setJobStatusId($activeStatus)
+        $jobPool->setJobStatus($activeStatus)
             ->setPublisher($publisher);
 
         $this->entityManager->persist($jobPool);
@@ -77,19 +77,19 @@ class JobPublishedManager implements JobPublishedManagerInterface
         $jobPublished->setJobPool($jobPool);
 
         $this->entityManager->persist($jobPublished);
-
-        return $jobPublished;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)  : JobPublishedInterface
+    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         // job pool
         $activeStatus = $this->jobStatusManager->getPublished();
-        $jobPool->setJobStatusId($activeStatus)
+        $jobPool->setJobStatus($activeStatus)
             ->setPublisher($publisher);
+
+        $this->entityManager->persist($jobPool);
 
         // job publisher
         $jobPublished = $this->getJobPublished($publisher, $jobPool);

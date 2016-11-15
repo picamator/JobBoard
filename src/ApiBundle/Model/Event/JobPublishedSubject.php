@@ -9,6 +9,8 @@ use ApiBundle\Model\Api\Manager\JobPublishedManagerInterface;
 
 /**
  * Job Published subject
+ *
+ * @codeCoverageIgnore
  */
 class JobPublishedSubject implements JobPublishedManagerInterface, SubjectInterface
 {
@@ -32,7 +34,7 @@ class JobPublishedSubject implements JobPublishedManagerInterface, SubjectInterf
      *
      * @events beforeReviewedPublish, afterReviewedPublish
      */
-    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPublishedInterface
+    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         $this->notify('beforeReviewedPublish', $publisher, $jobPool);
         $jobPublished = $this->jobPublishedManager->reviewedPublish($publisher, $jobPool);
@@ -46,7 +48,7 @@ class JobPublishedSubject implements JobPublishedManagerInterface, SubjectInterf
      *
      * @events beforeAutoPublish, afterAutoPublish
      */
-    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)  : JobPublishedInterface
+    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         $this->notify('beforeAutoPublish', $publisher, $jobPool);
         $jobPublished = $this->jobPublishedManager->autoPublish($publisher, $jobPool);

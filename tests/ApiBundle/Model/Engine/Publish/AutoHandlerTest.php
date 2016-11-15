@@ -105,14 +105,28 @@ class AutoHandlerTest extends BaseTest
             ->willReturn(1);
 
         // publisher status mock
-        $this->publisherStatusManagerMock->expects($this->once())
-            ->method('getActive')
+        $statusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $statusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(1);
 
+        $this->publisherStatusManagerMock->expects($this->once())
+            ->method('getActive')
+            ->willReturn($statusMock);
+
         // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getPublisherStatusId')
+        $publisherStatusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $publisherStatusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(2);
+
+        $this->publisherMock->expects($this->once())
+            ->method('getPublisherStatus')
+            ->willReturn($publisherStatusMock);
 
         // never
         $this->jobPublishedManagerMock->expects($this->never())
@@ -134,14 +148,28 @@ class AutoHandlerTest extends BaseTest
             ->willReturn(1);
 
         // publisher status mock
-        $this->publisherStatusManagerMock->expects($this->once())
-            ->method('getActive')
+        $statusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $statusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(1);
 
+        $this->publisherStatusManagerMock->expects($this->once())
+            ->method('getActive')
+            ->willReturn($statusMock);
+
         // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getPublisherStatusId')
+        $publisherStatusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $publisherStatusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(1);
+
+        $this->publisherMock->expects($this->once())
+            ->method('getPublisherStatus')
+            ->willReturn($publisherStatusMock);
 
         // job published mock
         $jobPublishedMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\JobPublishedInterface')

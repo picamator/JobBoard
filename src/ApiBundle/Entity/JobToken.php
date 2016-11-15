@@ -18,11 +18,6 @@ class JobToken implements JobTokenInterface
     private $id;
 
     /**
-     * @var int
-     */
-    private $jobPoolId;
-
-    /**
      * @var string
      */
     private $token;
@@ -55,30 +50,6 @@ class JobToken implements JobTokenInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set jobPoolId
-     *
-     * @param integer $jobPoolId
-     *
-     * @return JobTokenInterface
-     */
-    public function setJobPoolId(int $jobPoolId) : JobTokenInterface
-    {
-        $this->jobPoolId = $jobPoolId;
-
-        return $this;
-    }
-
-    /**
-     * Get jobPoolId
-     *
-     * @return integer
-     */
-    public function getJobPoolId() : int
-    {
-        return $this->jobPoolId;
     }
 
     /**

@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Job Status repository
+ *
+ * @codeCoverageIgnore
  */
 class JobStatusRepository extends EntityRepository implements JobStatusRepositoryInterface
 {
@@ -23,8 +25,7 @@ class JobStatusRepository extends EntityRepository implements JobStatusRepositor
             ->getQuery();
 
         $query->useResultCache(true);
-        $result = $query->getOneOrNullResult();
 
-        return $result ?? null;
+        return $query->getOneOrNullResult();
     }
 }

@@ -8,6 +8,8 @@ use ApiBundle\Model\Api\Manager\JobPoolManagerInterface;
 
 /**
  * Job Pool subject
+ *
+ * @codeCoverageIgnore
  */
 class JobPoolSubject implements JobPoolManagerInterface, SubjectInterface
 {
@@ -32,7 +34,7 @@ class JobPoolSubject implements JobPoolManagerInterface, SubjectInterface
      *
      * @events beforeSaveForReview, afterSaveForReview
      */
-    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPoolInterface
+    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         $this->notify('beforeSaveForReview', $publisher, $jobPool);
         $this->jobPoolManager->saveForReview($publisher, $jobPool);

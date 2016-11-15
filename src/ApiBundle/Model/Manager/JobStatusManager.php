@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Model\Manager;
 
+use ApiBundle\Model\Api\Entity\JobStatusInterface;
 use ApiBundle\Model\Api\Manager\JobStatusManagerInterface;
 use ApiBundle\Model\Api\Repository\JobStatusRepositoryInterface;
 use ApiBundle\Model\Exception\UndefinedStatusException;
@@ -43,17 +44,17 @@ class JobStatusManager implements JobStatusManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getId(string $slug) : int
+    public function getId(string $slug) : JobStatusInterface
     {
         $entity = $this->repository->findStatus($slug);
 
         if(is_null($entity) || is_null($entity->getId())) {
             throw new UndefinedStatusException(
-                sprintf('Undefined status "%s', $slug)
+                sprintf('Undefined status "%s"', $slug)
             );
         }
 
-        return $entity->getId();
+        return $entity;
     }
 
     /**
@@ -61,7 +62,7 @@ class JobStatusManager implements JobStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getPublished() : int
+    public function getPublished() : JobStatusInterface
     {
         return $this->getId(self::$published);
     }
@@ -71,7 +72,7 @@ class JobStatusManager implements JobStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getSpam() : int
+    public function getSpam() : JobStatusInterface
     {
         return $this->getId(self::$spam);
     }
@@ -81,7 +82,7 @@ class JobStatusManager implements JobStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getForReview() : int
+    public function getForReview() : JobStatusInterface
     {
         return $this->getId(self::$forReview);
     }

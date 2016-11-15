@@ -18,12 +18,6 @@ ApiBundle\Entity\JobPool:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    publisherId:
-      type: integer
-      column: publisher_id
-    jobStatusId:
-      type: integer
-      column: job_status_id
     title:
       type: string
       length: 255

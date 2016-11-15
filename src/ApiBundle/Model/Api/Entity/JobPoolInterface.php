@@ -14,38 +14,6 @@ interface JobPoolInterface
     public function getId();
 
     /**
-     * Set publisherId
-     *
-     * @param integer $publisherId
-     *
-     * @return JobPoolInterface
-     */
-    public function setPublisherId(int $publisherId) : JobPoolInterface;
-
-    /**
-     * Get publisherId
-     *
-     * @return integer
-     */
-    public function getPublisherId() : int;
-
-    /**
-     * Set jobStatusId
-     *
-     * @param integer $jobStatusId
-     *
-     * @return JobPoolInterface
-     */
-    public function setJobStatusId(int $jobStatusId) : JobPoolInterface;
-
-    /**
-     * Get jobStatusId
-     *
-     * @return integer
-     */
-    public function getJobStatusId() : int;
-
-    /**
      * Set title
      *
      * @param string $title
@@ -117,7 +85,6 @@ interface JobPoolInterface
      * @return JobPoolInterface
      */
     public function setPublisher(\ApiBundle\Entity\Publisher $publisher = null) : JobPoolInterface;
-
 
     /**
      * Get publisher

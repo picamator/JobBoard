@@ -14,22 +14,6 @@ interface PublisherInterface
     public function getId();
 
     /**
-     * Set publisherStatusId
-     *
-     * @param integer $publisherStatusId
-     *
-     * @return PublisherInterface
-     */
-    public function setPublisherStatusId(int $publisherStatusId) : PublisherInterface;
-
-    /**
-     * Get publisherStatusId
-     *
-     * @return integer
-     */
-    public function getPublisherStatusId() : int;
-
-    /**
      * Set email
      *
      * @param string $email

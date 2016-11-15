@@ -75,15 +75,18 @@ class AutoHandler extends AbstractPublishHandler
 
         // inactive publisher
         $status = $this->publisherStatusManager->getActive();
-        if ($publisher->getPublisherStatusId() !== $status) {
+        if ($publisher->getPublisherStatus()->getId() !== $status->getId()) {
             return null;
         }
 
         // provide auto publishing
-        $jobPublished = $this->entityManager->transactional(function() use ($publisher, $jobPool) {
-            return $this->jobPublishedManager->autoPublish($publisher, $jobPool);
+        $this->entityManager->transactional(function() use ($publisher, $jobPool, &$jobPublished) {
+            $jobPublished = $this->jobPublishedManager->autoPublish($publisher, $jobPool);
         });
 
+        // it is critical to get createdAt
+        // all date are generated on MySQL server therefore to keep consistence generation of that date also kept on database server
+        $this->entityManager->refresh($jobPublished);
         $job = $this->jobFactory->create($jobPublished);
 
         return $this->jobSeparatedFactory->create($job);

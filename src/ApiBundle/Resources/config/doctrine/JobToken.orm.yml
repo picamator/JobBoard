@@ -13,9 +13,6 @@ ApiBundle\Entity\JobToken:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    jobPoolId:
-      type: integer
-      column: job_pool_id
     token:
       type: string
       length: 32

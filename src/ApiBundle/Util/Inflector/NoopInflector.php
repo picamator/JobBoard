@@ -7,6 +7,8 @@ use FOS\RestBundle\Inflector\InflectorInterface;
 
 /**
  * Inflector
+ *
+ * @codeCoverageIgnore
  */
 class NoopInflector implements InflectorInterface
 {

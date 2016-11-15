@@ -53,7 +53,7 @@ class RejectHandler extends AbstractPublishHandler
 
         // another status then awaiting for moderation
         $status = $this->publisherStatusManager->getAwaitingModeration();
-        if ($publisher->getPublisherStatusId() !== $status) {
+        if ($publisher->getPublisherStatus()->getId() !== $status->getId()) {
             return null;
         }
 

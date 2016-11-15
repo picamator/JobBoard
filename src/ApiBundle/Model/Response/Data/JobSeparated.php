@@ -11,17 +11,12 @@ use ApiBundle\Model\Api\Response\Data\JobSeparatedInterface;
  *
  * @codeCoverageIgnore
  */
-class JobSeparated implements JobSeparatedInterface
+class JobSeparated implements JobSeparatedInterface, \JsonSerializable
 {
     /**
-     * @var JobInterface
+     * @var array
      */
     private $data;
-
-    /**
-     * @var int
-     */
-    private $code;
 
     /**
      * @param JobInterface  $data
@@ -29,8 +24,10 @@ class JobSeparated implements JobSeparatedInterface
      */
     public function __construct(JobInterface $data, int $code)
     {
-        $this->data = $data;
-        $this->code = $code;
+        $this->data = [
+            'data' => $data,
+            'code' => $code,
+        ];
     }
 
     /**
@@ -38,7 +35,7 @@ class JobSeparated implements JobSeparatedInterface
      */
     public function getData() : JobInterface
     {
-        return $this->data;
+        return $this->data['data'];
     }
 
     /**
@@ -46,6 +43,14 @@ class JobSeparated implements JobSeparatedInterface
      */
     public function getCode() : int
     {
-        return $this->code;
+        return $this->data['code'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return $this->data;
     }
 }

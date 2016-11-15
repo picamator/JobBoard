@@ -14,22 +14,6 @@ interface JobPublishedInterface
     public function getId();
 
     /**
-     * Set jobPoolId
-     *
-     * @param integer $jobPoolId
-     *
-     * @return JobPublishedInterface
-     */
-    public function setJobPoolId(int $jobPoolId) : JobPublishedInterface;
-
-    /**
-     * Get jobPoolId
-     *
-     * @return integer
-     */
-    public function getJobPoolId() : int;
-
-    /**
      * Set title
      *
      * @param string $title

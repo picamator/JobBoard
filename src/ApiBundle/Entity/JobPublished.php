@@ -19,11 +19,6 @@ class JobPublished implements JobPublishedInterface
     private $id;
 
     /**
-     * @var int
-     */
-    private $jobPoolId;
-
-    /**
      * @var string
      */
     private $title;
@@ -56,30 +51,6 @@ class JobPublished implements JobPublishedInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set jobPoolId
-     *
-     * @param integer $jobPoolId
-     *
-     * @return JobPublishedInterface
-     */
-    public function setJobPoolId(int $jobPoolId) : JobPublishedInterface
-    {
-        $this->jobPoolId = $jobPoolId;
-
-        return $this;
-    }
-
-    /**
-     * Get jobPoolId
-     *
-     * @return integer
-     */
-    public function getJobPoolId() : int
-    {
-        return $this->jobPoolId;
     }
 
     /**

@@ -17,7 +17,7 @@ class NoProceedHandler extends AbstractPublishHandler
     /**
      * @var string
      */
-    private static $errorMessage = 'Job can not be published. Application fails to proceed publication process. Please try again later or contact to administrator.';
+    private static $errorMessage = 'Job can not be published. Application failed to proceed publication process. Please try again later or contact to administrator.';
 
     /**
      * @var string

@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Job Pool repository
+ *
+ * @codeCoverageIgnore
  */
 class JobPoolRepository extends EntityRepository  implements JobPoolRepositoryInterface
 {
@@ -18,14 +20,14 @@ class JobPoolRepository extends EntityRepository  implements JobPoolRepositoryIn
     {
         $query = $this->createQueryBuilder('jp')
             ->select('jp')
-            ->select('partial jp.{id, publisherId, jobStatusId, title, description}')
+            ->select('partial jp.{id, publisherId, jobStatusId, title, description}, partial p.{id, email}')
+            ->join('p.publisher', 'p')
             ->where('jp.id = ?1')
             ->setParameter(1, $id)
             ->getQuery();
 
-        $query->useResultCache(true);
-        $result = $query->getOneOrNullResult();
+        $query->useResultCache(false);
 
-        return $result[0] ?? null;
+        return $query->getOneOrNullResult();
     }
 }

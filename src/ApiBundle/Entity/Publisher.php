@@ -18,11 +18,6 @@ class Publisher implements PublisherInterface
     private $id;
 
     /**
-     * @var int
-     */
-    private $publisherStatusId;
-
-    /**
      * @var string
      */
     private $email;
@@ -50,30 +45,6 @@ class Publisher implements PublisherInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set publisherStatusId
-     *
-     * @param integer $publisherStatusId
-     *
-     * @return PublisherInterface
-     */
-    public function setPublisherStatusId(int $publisherStatusId) : PublisherInterface
-    {
-        $this->publisherStatusId = $publisherStatusId;
-
-        return $this;
-    }
-
-    /**
-     * Get publisherStatusId
-     *
-     * @return integer
-     */
-    public function getPublisherStatusId() : int
-    {
-        return $this->publisherStatusId;
     }
 
     /**

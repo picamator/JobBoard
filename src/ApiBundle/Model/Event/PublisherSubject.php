@@ -7,6 +7,8 @@ use ApiBundle\Model\Api\Manager\PublisherManagerInterface;
 
 /**
  * Publisher subject
+ *
+ * @codeCoverageIgnore
  */
 class PublisherSubject implements PublisherManagerInterface, SubjectInterface
 {

@@ -8,6 +8,8 @@ use Doctrine\ORM\EntityRepository;
 
 /**
  * Job Token repository
+ *
+ * @codeCoverageIgnore
  */
 class JobTokenRepository extends EntityRepository implements JobTokenRepositoryInterface
 {
@@ -18,13 +20,13 @@ class JobTokenRepository extends EntityRepository implements JobTokenRepositoryI
     {
         $query = $this->createQueryBuilder('jt')
             ->select('partial jt.{id, jobPoolId, token, isActive}')
+            ->join('p.job_pool', 'jp')
             ->where('jt.jobPoolId = ?1')
             ->setParameter(1, $jobPoolId)
             ->getQuery();
 
         $query->useResultCache(false);
-        $result = $query->getOneOrNullResult();
 
-        return $result[0] ?? null;
+        return $query->getOneOrNullResult();
     }
 }

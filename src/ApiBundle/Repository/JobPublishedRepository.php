@@ -9,6 +9,8 @@ use Doctrine\ORM\NoResultException;
 
 /**
  * Job Published repository
+ *
+ * @codeCoverageIgnore
  */
 class JobPublishedRepository extends EntityRepository  implements JobPublishedRepositoryInterface
 {

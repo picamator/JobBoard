@@ -48,21 +48,19 @@ class JobPoolManager implements JobPoolManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPoolInterface
+    public function saveForReview(PublisherInterface $publisher, JobPoolInterface $jobPool)
     {
         // publisher
-        $publisherStatusId = $this->publisherStatusManager->getAwaitingModeration();
-        $publisher->setPublisherStatusId($publisherStatusId);
+        $publisherStatus = $this->publisherStatusManager->getAwaitingModeration();
+        $publisher->setPublisherStatus($publisherStatus);
 
         $this->entityManager->persist($publisher);
 
         // job pool
         $jobPoolStatus = $this->jobStatusManager->getForReview();
-        $jobPool->setJobStatusId($jobPoolStatus)
+        $jobPool->setJobStatus($jobPoolStatus)
             ->setPublisher($publisher);
 
         $this->entityManager->persist($jobPool);
-
-        return $jobPool;
     }
 }

@@ -82,14 +82,28 @@ class ReviewHandlerTest extends BaseTest
     public function testSkipNoInactiveHandle()
     {
         // publisher status manager mock
-        $this->publisherStatusManagerMock->expects($this->once())
-            ->method('getInactive')
+        $statusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $statusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(1);
 
+        $this->publisherStatusManagerMock->expects($this->once())
+            ->method('getInactive')
+            ->willReturn($statusMock);
+
         // publisher mock
-        $this->publisherMock->expects($this->once())
-            ->method('getPublisherStatusId')
+        $publisherStatusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $publisherStatusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(2);
+
+        $this->publisherMock->expects($this->once())
+            ->method('getPublisherStatus')
+            ->willReturn($publisherStatusMock);
 
         // never
         $this->jobPoolManagerMock->expects($this->never())
@@ -100,17 +114,82 @@ class ReviewHandlerTest extends BaseTest
         $this->handler->handle($this->publisherMock, $this->jobPoolMock);
     }
 
-    public function testHandle()
+    public function testNewPublisherHandle()
     {
         // publisher status manager mock
+        $statusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $statusMock->expects($this->exactly(2))
+            ->method('getId')
+            ->willReturn(1);
+
         $this->publisherStatusManagerMock->expects($this->once())
             ->method('getInactive')
-            ->willReturn(1);
+            ->willReturn($statusMock);
 
         // publisher mock
         $this->publisherMock->expects($this->once())
-            ->method('getPublisherStatusId')
+            ->method('getPublisherStatus');
+
+        // job pool manager mock
+        $this->jobPoolManagerMock->expects($this->once())
+            ->method('saveForReview')
+            ->willReturn($this->jobPoolMock);
+
+        // job pool mock
+        $this->jobPoolMock->expects($this->exactly(2))
+            ->method('getId');
+
+        // task mock
+        $this->taskMock->expects($this->exactly(2))
+            ->method('addTask')
+            ->willReturnSelf();
+
+        // error builder mock
+        $this->errorBuilderMock->expects($this->once())
+            ->method('setCode')
+            ->with($this->equalTo(200))
+            ->willReturnSelf();
+
+        $this->errorBuilderMock->expects($this->once())
+            ->method('setMessage')
+            ->willReturnSelf();
+
+        $errorMock = $this->getMockBuilder('ApiBundle\Model\Api\Response\Data\ErrorInterface')
+            ->getMock();
+        $this->errorBuilderMock->expects($this->once())
+            ->method('build')
+            ->willReturn($errorMock);
+
+        $this->handler->handle($this->publisherMock, $this->jobPoolMock);
+    }
+
+    public function testHandle()
+    {
+        // publisher status manager mock
+        $statusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $statusMock->expects($this->once())
+            ->method('getId')
             ->willReturn(1);
+
+        $this->publisherStatusManagerMock->expects($this->once())
+            ->method('getInactive')
+            ->willReturn($statusMock);
+
+        // publisher mock
+        $publisherStatusMock = $this->getMockBuilder('ApiBundle\Model\Api\Entity\PublisherStatusInterface')
+            ->getMock();
+
+        $publisherStatusMock->expects($this->once())
+            ->method('getId')
+            ->willReturn(1);
+
+        $this->publisherMock->expects($this->once())
+            ->method('getPublisherStatus')
+            ->willReturn($publisherStatusMock);
 
         // job pool manager mock
         $this->jobPoolManagerMock->expects($this->once())

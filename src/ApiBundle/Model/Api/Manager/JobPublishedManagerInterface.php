@@ -17,11 +17,11 @@ interface JobPublishedManagerInterface
      * @param PublisherInterface $publisher
      * @param JobPoolInterface   $jobPool
      *
-     * @return JobPublishedInterface
+     * @return void
      *
      * @throws RuntimeException
      */
-    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPublishedInterface;
+    public function reviewedPublish(PublisherInterface $publisher, JobPoolInterface $jobPool);
 
     /**
      * Auto publish
@@ -29,9 +29,9 @@ interface JobPublishedManagerInterface
      * @param PublisherInterface $publisher
      * @param JobPoolInterface   $jobPool
      *
-     * @return JobPublishedInterface
+     * @return JobPublishedInterface | null returns entity object after finishing transaction otherwise null
      *
      * @throws RuntimeException
      */
-    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool) : JobPublishedInterface;
+    public function autoPublish(PublisherInterface $publisher, JobPoolInterface $jobPool);
 }

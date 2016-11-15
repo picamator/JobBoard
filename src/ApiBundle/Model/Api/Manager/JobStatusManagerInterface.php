@@ -1,6 +1,7 @@
 <?php
 namespace ApiBundle\Model\Api\Manager;
 
+use ApiBundle\Model\Api\Entity\JobStatusInterface;
 use ApiBundle\Model\Exception\UndefinedStatusException;
 
 /**
@@ -13,36 +14,36 @@ interface JobStatusManagerInterface
      *
      * @param string $slug
      *
-     * @return int
+     * @return JobStatusInterface
      *
      * @throws UndefinedStatusException
      */
-    public function getId(string $slug) : int;
+    public function getId(string $slug) : JobStatusInterface;
 
     /**
      * Get "published" status identifier
      *
-     * @return int
+     * @return JobStatusInterface
      *
      * @throws UndefinedStatusException
      */
-    public function getPublished() : int;
+    public function getPublished() : JobStatusInterface;
 
     /**
      * Get "spam" status identifier
      *
-     * @return int
+     * @return JobStatusInterface
      *
      * @throws UndefinedStatusException
      */
-    public function getSpam() : int;
+    public function getSpam() : JobStatusInterface;
 
     /**
      * Get "forReview" status identifier
      *
-     * @return int
+     * @return JobStatusInterface
      *
      * @throws UndefinedStatusException
      */
-    public function getForReview() : int;
+    public function getForReview() : JobStatusInterface;
 }

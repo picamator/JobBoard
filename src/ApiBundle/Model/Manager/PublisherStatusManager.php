@@ -3,6 +3,7 @@ declare(strict_types = 1);
 
 namespace ApiBundle\Model\Manager;
 
+use ApiBundle\Model\Api\Entity\PublisherStatusInterface;
 use ApiBundle\Model\Api\Manager\PublisherStatusManagerInterface;
 use ApiBundle\Model\Api\Repository\PublisherStatusRepositoryInterface;
 use ApiBundle\Model\Exception\UndefinedStatusException;
@@ -43,7 +44,7 @@ class PublisherStatusManager implements PublisherStatusManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function getId(string $slug) : int
+    public function getId(string $slug) : PublisherStatusInterface
     {
         $entity = $this->repository->findStatus($slug);
 
@@ -53,7 +54,7 @@ class PublisherStatusManager implements PublisherStatusManagerInterface
             );
         }
 
-        return $entity->getId();
+        return $entity;
     }
 
     /**
@@ -61,7 +62,7 @@ class PublisherStatusManager implements PublisherStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getActive() : int
+    public function getActive() : PublisherStatusInterface
     {
         return $this->getId(self::$active);
     }
@@ -71,7 +72,7 @@ class PublisherStatusManager implements PublisherStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getInactive() : int
+    public function getInactive() : PublisherStatusInterface
     {
         return $this->getId(self::$inactive);
     }
@@ -81,7 +82,7 @@ class PublisherStatusManager implements PublisherStatusManagerInterface
      *
      * @codeCoverageIgnore
      */
-    public function getAwaitingModeration() : int
+    public function getAwaitingModeration() : PublisherStatusInterface
     {
         return $this->getId(self::$awaitingModeration);
     }

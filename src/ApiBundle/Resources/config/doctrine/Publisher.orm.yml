@@ -13,9 +13,6 @@ ApiBundle\Entity\Publisher:
       type: integer
       generator: { strategy: AUTO }
   fields:
-    publisherStatusId:
-      type: integer
-      column: publisher_status_id
     email:
       type: string
       length: 255

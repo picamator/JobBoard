@@ -14,22 +14,6 @@ interface JobTokenInterface
     public function getId();
 
     /**
-     * Set jobPoolId
-     *
-     * @param integer $jobPoolId
-     *
-     * @return JobTokenInterface
-     */
-    public function setJobPoolId(int $jobPoolId) : JobTokenInterface;
-
-    /**
-     * Get jobPoolId
-     *
-     * @return integer
-     */
-    public function getJobPoolId() : int;
-
-    /**
      * Set token
      *
      * @param string $token
