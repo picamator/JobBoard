@@ -2,6 +2,7 @@
 namespace ApiBundle\Controller;
 
 use ApiBundle\Service\Controller\Job\GetService;
+use ApiBundle\Service\Controller\Job\PostService;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\Controller\FOSRestController;
 use Symfony\Component\HttpFoundation\Request;
@@ -51,21 +52,5 @@ class JobController extends FOSRestController implements ClassResourceInterface
         $view = $this->view($data, $response->getCode());
 
         return $this->handleView($view);
-    }
-
-    /**
-     * PUT: job
-     */
-    public function putAction()
-    {
-
-    }
-
-    /**
-     * DELETE: job
-     */
-    public function deleteAction()
-    {
-
     }
 }

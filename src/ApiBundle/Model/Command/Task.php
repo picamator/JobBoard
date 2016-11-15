@@ -5,6 +5,8 @@ use ApiBundle\Model\Api\Command\TaskInterface;
 
 /**
  * Task, command bus implementation
+ *
+ * @codeCoverageIgnore
  */
 class Task implements TaskInterface
 {

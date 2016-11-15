@@ -5,6 +5,8 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
+ *
+ * @codeCoverageIgnore
  */
 class MaxPerPageLimit extends Constraint
 {

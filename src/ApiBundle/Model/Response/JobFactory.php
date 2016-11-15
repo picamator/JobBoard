@@ -10,6 +10,8 @@ use ApiBundle\Model\Api\Response\JobFactoryInterface;
 
 /**
  * Job factory
+ *
+ * @codeCoverageIgnore
  */
 class JobFactory implements JobFactoryInterface
 {

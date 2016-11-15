@@ -53,6 +53,8 @@ class JobBuilder implements JobBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setId(int $id) : JobBuilderInterface
     {
@@ -63,6 +65,8 @@ class JobBuilder implements JobBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setTitle(string $title) : JobBuilderInterface
     {
@@ -73,6 +77,8 @@ class JobBuilder implements JobBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setDescription(string $description) : JobBuilderInterface
     {
@@ -83,6 +89,8 @@ class JobBuilder implements JobBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setEmail(string $email) : JobBuilderInterface
     {
@@ -93,6 +101,8 @@ class JobBuilder implements JobBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setPublishedDate(\DateTime $publishedDate) : JobBuilderInterface
     {

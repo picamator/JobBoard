@@ -48,6 +48,8 @@ class JobCollectionBuilder implements JobCollectionBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setMaxPerPage(int $maxPerPage) : JobCollectionBuilderInterface
     {
@@ -58,6 +60,8 @@ class JobCollectionBuilder implements JobCollectionBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setTotal(int $total) : JobCollectionBuilderInterface
     {
@@ -68,6 +72,8 @@ class JobCollectionBuilder implements JobCollectionBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setStartAt(int $startAt) : JobCollectionBuilderInterface
     {
@@ -78,6 +84,8 @@ class JobCollectionBuilder implements JobCollectionBuilderInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @codeCoverageIgnore
      */
     public function setData(CollectionInterface $data) : JobCollectionBuilderInterface
     {
