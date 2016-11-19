@@ -1,0 +1,26 @@
+ApiBundle\Entity\JobPublished:
+  type: entity
+  table: job_published
+  repositoryClass: ApiBundle\Repository\JobPublishedRepository
+  manyToOne:
+    job_pool:
+      targetEntity: JobPool
+      joinColumn:
+        name: job_pool_id
+        referencedColumnName: id
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    title:
+      type: string
+      length: 255
+    description:
+      type: text
+    email:
+      type: string
+      length: 255
+    createdAt:
+      type: datetime
+      column: created_at

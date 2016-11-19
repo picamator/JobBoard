@@ -1,0 +1,25 @@
+ApiBundle\Entity\Publisher:
+  type: entity
+  table: publisher
+  repositoryClass: ApiBundle\Repository\PublisherRepository
+  manyToOne:
+    publisher_status:
+      targetEntity: PublisherStatus
+      joinColumn:
+        name: publisher_status_id
+        referencedColumnName: id
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    email:
+      type: string
+      length: 255
+      unique: true
+    createdAt:
+      type: datetime
+      column: created_at
+    updatedAt:
+      type: datetime
+      column: updated_at

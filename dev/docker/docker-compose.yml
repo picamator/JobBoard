@@ -1,0 +1,33 @@
+version: '2'
+services:
+  jobboard-web:
+    build:
+        context : ../..
+        dockerfile: dev/docker/web/Dockerfile
+    volumes:
+      - ../../:/var/www/JobBoard
+    ports:
+       - "8081:80"
+       - "2228:22"
+    links:
+      - jobboard-mysql:jobboard-mysql
+      - jobboard-rabbitmq:jobboard-rabbitmq
+      - jobboard-memcached:jobboard-memcached
+
+  jobboard-mysql:
+    image: mysql:5.7
+    environment:
+      - "MYSQL_ROOT_PASSWORD=root"
+    ports:
+      - "8306:3306"
+
+  jobboard-rabbitmq:
+    image: rabbitmq:3.6.5-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+
+  jobboard-memcached:
+    image: memcached:1.4
+    ports:
+      - "11211:11211"

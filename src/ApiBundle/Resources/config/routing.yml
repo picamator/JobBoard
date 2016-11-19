@@ -1,0 +1,3 @@
+job:
+    type:     rest
+    resource: ApiBundle\Controller\JobController

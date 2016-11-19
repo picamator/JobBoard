@@ -1,0 +1,24 @@
+ApiBundle\Entity\JobToken:
+  type: entity
+  table: job_token
+  repositoryClass: ApiBundle\Repository\JobTokenRepository
+  manyToOne:
+    job_pool:
+      targetEntity: JobPool
+      joinColumn:
+        name: job_pool_id
+        referencedColumnName: id
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    token:
+      type: string
+      length: 32
+    isActive:
+      type: boolean
+      column: is_active
+    createdAt:
+      type: datetime
+      column: created_at

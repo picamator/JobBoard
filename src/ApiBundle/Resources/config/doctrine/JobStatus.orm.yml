@@ -1,0 +1,19 @@
+ApiBundle\Entity\JobStatus:
+  type: entity
+  table: job_status
+  repositoryClass: ApiBundle\Repository\JobStatusRepository
+  id:
+    id:
+      type: integer
+      generator: { strategy: AUTO }
+  fields:
+    slug:
+      type: string
+      length: 45
+      unique: true
+    name:
+      type: string
+      length: 45
+    createdAt:
+      type: datetime
+      column: created_at

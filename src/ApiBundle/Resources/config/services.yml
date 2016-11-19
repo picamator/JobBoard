@@ -1,0 +1,129 @@
+services:
+  object_manager:
+    class: ApiBundle\Model\ObjectManager
+
+  # entity
+  entity_job_pool:
+    class: ApiBundle\Entity\JobPool
+
+  # manager
+  manager_job_status:
+    class: ApiBundle\Model\Manager\JobStatusManager
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:JobStatus')"]
+
+  manager_publisher:
+    class: ApiBundle\Model\Manager\PublisherManager
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:Publisher')", "@object_manager"]
+
+  manager_publisher_status:
+    class: ApiBundle\Model\Manager\PublisherStatusManager
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:PublisherStatus')"]
+
+  manager_job_published:
+    class: ApiBundle\Model\Manager\JobPublishedManager
+    arguments: ["@=service('doctrine.orm.entity_manager')", "@manager_job_status", "@object_manager"]
+
+  manager_job_pool:
+    class: ApiBundle\Model\Manager\JobPoolManager
+    arguments: ["@=service('doctrine.orm.entity_manager')", "@manager_publisher_status", "@manager_job_status"]
+
+  # response
+  response_error_builder:
+    class: ApiBundle\Model\Response\ErrorBuilder
+    arguments: ["@object_manager"]
+
+  response_job_collection_builder:
+    class: ApiBundle\Model\Response\JobCollectionBuilder
+    arguments: ["@object_manager"]
+
+  response_collection_factory:
+    class: ApiBundle\Model\Response\CollectionFactory
+    arguments: ["@object_manager"]
+
+  response_job_builder:
+    class: ApiBundle\Model\Response\JobBuilder
+    arguments: ["@object_manager"]
+
+  response_job_factory:
+    class: ApiBundle\Model\Response\JobFactory
+    arguments: ["@response_job_builder"]
+
+  response_job_separated_factory:
+    class: ApiBundle\Model\Response\JobSeparatedFactory
+    arguments: ["@object_manager"]
+
+  # event
+  event_publisher:
+    class: ApiBundle\Model\Event\PublisherSubject
+    arguments: ["@manager_publisher"]
+
+  event_job_published:
+    class: ApiBundle\Model\Event\JobPublishedSubject
+    arguments: ["@manager_job_published"]
+
+  event_job_pool:
+    class: ApiBundle\Model\Event\JobPoolSubject
+    arguments: ["@manager_job_pool"]
+
+  # engine
+  engine_job_pagination:
+    class: ApiBundle\Model\Engine\JobPagination
+    arguments: ["@=service('doctrine.orm.entity_manager').getRepository('ApiBundle:JobPublished')", "@response_job_collection_builder", "@response_collection_factory", "@response_job_factory"]
+
+  engine_publish_review:
+    class: ApiBundle\Model\Engine\Publish\ReviewHandler
+    arguments: ["@=service('doctrine.orm.entity_manager')", "@manager_publisher_status", "@event_job_pool", "@command_task", "@response_error_builder"]
+
+  engine_publish_reject:
+    class: ApiBundle\Model\Engine\Publish\RejectHandler
+    arguments: ["@manager_publisher_status", "@response_error_builder"]
+
+  engine_publish_no_proceed:
+    class: ApiBundle\Model\Engine\Publish\NoProceedHandler
+    arguments: ["@command_task", "@response_error_builder"]
+
+  engine_publish_handler:
+    class: ApiBundle\Model\Engine\Publish\AutoHandler
+    arguments: ["@=service('doctrine.orm.entity_manager')", "@manager_publisher_status", "@event_job_published", "@response_job_factory", "@response_job_separated_factory"]
+    calls:
+      - ["setSuccessor", ["@engine_publish_review"]]
+      - ["setSuccessor", ["@engine_publish_reject"]]
+      - ["setSuccessor", ["@engine_publish_no_proceed"]]
+
+  engine_job_reporting:
+    class: ApiBundle\Model\Engine\JobReporting
+    arguments: ["@event_publisher", "@entity_job_pool", "@engine_publish_handler"]
+
+  # command
+  command_task:
+    class: ApiBundle\Model\Command\Task
+
+  # request
+  request_pagination_factory:
+    class: ApiBundle\Model\Request\PaginationFactory
+    arguments: ["@object_manager"]
+
+  request_job_posting_factory:
+    class: ApiBundle\Model\Request\JobPostingFactory
+    arguments: ["@object_manager"]
+
+  # services
+  service_controller_error_exeption:
+    class: ApiBundle\Service\Controller\Error\ExceptionService
+    arguments: ["@command_task", "@response_error_builder"]
+
+  service_controller_error_bad_request:
+    class: ApiBundle\Service\Controller\Error\BadRequestService
+    arguments: ["@response_error_builder"]
+
+  service_job_get:
+    class: ApiBundle\Service\Controller\Job\GetService
+    arguments: ["@=container"]
+
+  service_error_render:
+    class: ApiBundle\Service\ErrorRenderService
+    arguments: ["@=container"]
+
+  service_job_post:
+    class: ApiBundle\Service\Controller\Job\PostService
+    arguments: ["@=container"]
