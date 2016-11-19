@@ -69,7 +69,7 @@ To configurate connection to RabbitMQ inside 'jobboard-web' use:
 To configurate connection to RabbitMQ inside 'jobboard-web' use:
 
 * host: jobboard-memcached
-* port
+* port: 11211
 
 Usefull commands
 ----------------

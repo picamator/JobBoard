@@ -17,9 +17,21 @@ Dev
 Job Board platform with straightforward workflow.
 Here is the main characteristics:
 
-* no admin page
-* no registration for posting
-* moderation by email for new publisher
+* No admin page
+* No registration for posting
+* Moderation by email for new publisher
+
+Disclaimer
+----------
+Project is on prototype stage. 
+Some functionality were not implemented even though they are documented and presented on diagrams.
+List of **NOT** implemented features:
+
+* Email sending
+* UI
+* Loggers
+* Command bus
+* Job moderation
 
 Requirements
 ------------
@@ -79,14 +91,14 @@ _Note_: Domain communicate with any 3-rd party libraries through Gateways.
 More details inside [class diagram](doc/uml/class.diagram.png) and [layer activity diagram](doc/uml/layer.activity.diagram.png).
 
 ### Rest API
-Rest API on the second level of [Leonard Richardson maturity model](http://martinfowler.com/articles/richardsonMaturityModel.html). 
+Rest API fulfills the second level of [Leonard Richardson maturity model](http://martinfowler.com/articles/richardsonMaturityModel.html). 
 
 All request-response supports JSON format.
 
 #### Endpoint
-The API endpoint is `http://job-board.dev:8081\api\v1` where
+The API endpoint is `http://job-board.dev:8081/api/v1` where
 
-* `api` - indicator that it's an API area
+* `api` - api route
 * `v1` - api version
 
 #### Resources
@@ -252,8 +264,8 @@ User interface contains with several pages:
 ### Command bus
 Command bus is a query mechanism to asynchronously run operations such as:
 
-* sending emails
-* logging
+* Sending emails
+* Logging
  
 Table bellow describes those commands:
 
